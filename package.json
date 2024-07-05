@@ -1,7 +1,7 @@
 {
   "name": "strapi-plugin-admin-toolbox",
   "version": "1.0.0",
-  "description": "StrapiAdminToolbox (SAT) is a Strapi plugin that provides a set of tools to manage admin users, including generating fake admin users, deleting all admins except one, and restoring a specific admin user.",
+  "description": "Strapi Admin Toolbox (SAT) is a Strapi plugin that provides a set of tools to manage admin users, including generating fake admin users, deleting all admins except one, and restoring a specific admin user.",
   "strapi": {
     "name": "sat",
     "description": "A toolbox for managing admin users in Strapi",
