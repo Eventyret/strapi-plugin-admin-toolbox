@@ -1,6 +1,6 @@
 # StrapiAdminToolbox (SAT)
 
-![Logo]("https://raw.githubusercontent.com/Eventyret/strapi-plugin-admin-toolbox/main/logo.png")
+![Logo](https://raw.githubusercontent.com/Eventyret/strapi-plugin-admin-toolbox/main/logo.png)
 
 Strapi Admin Toolbox (SAT) is a Strapi plugin that provides a set of tools to manage admin users. This plugin helps you generate fake admin users, delete all admin users except one, and restore a specific admin user. It also aims to include a UI for managing your admins, particularly useful if you get locked out.
 
