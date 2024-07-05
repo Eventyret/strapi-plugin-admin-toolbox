@@ -1,0 +1,74 @@
+{
+  "name": "strapi-plugin-admin-toolbox",
+  "version": "1.0.0",
+  "description": "StrapiAdminToolbox (SAT) is a Strapi plugin that provides a set of tools to manage admin users, including generating fake admin users, deleting all admins except one, and restoring a specific admin user.",
+  "strapi": {
+    "name": "sat",
+    "description": "A toolbox for managing admin users in Strapi",
+    "kind": "plugin"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@strapi/design-system": "^1.6.3",
+    "@strapi/helper-plugin": "^4.6.0",
+    "@strapi/icons": "^1.6.3",
+    "@strapi/strapi": "^4.6.0",
+    "prop-types": "^15.7.2"
+  },
+  "devDependencies": {
+    "@strapi/typescript-utils": "^4.6.0",
+    "@types/react": "^17.0.53",
+    "@types/react-dom": "^18.0.28",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.32",
+    "@types/express": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
+    "styled-components": "^5.3.6",
+    "typescript": "5.0.4"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.2.1"
+  },
+  "files": [
+    "admin",
+    "server",
+    "dist",
+    "strapi-admin.js",
+    "strapi-server.js"
+  ],
+  "author": {
+    "name": "Simen Daehlin",
+    "nickname": "Eventyret",
+    "url": "https://github.com/Eventyret"
+  },
+  "maintainers": [
+    {
+      "name": "Simen Daehlin",
+      "nickname": "Eventyret",
+      "url": "https://github.com/Eventyret"
+    }
+  ],
+  "engines": {
+    "node": ">=18.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "develop": "tsc -p tsconfig.server.json -w",
+    "build": "tsc -p tsconfig.server.json",
+    "prepare": "yarn build"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Eventyret/strapi-plugin-admin-toolbox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Eventyret/strapi-plugin-admin-toolbox/issues"
+  },
+  "homepage": "https://github.com/Eventyret/strapi-plugin-admin-toolbox#readme"
+}
