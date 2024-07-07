@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { Admin } from './Columns';
+import { Admin } from './columns';
 
 interface EditDialogProps {
   admin: Admin;

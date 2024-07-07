@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Admin, columns } from '../components/UserTable/Columns';
+import { Admin, columns } from '../components/UserTable/columns';
 import { DataTable } from '../components/UserTable/DataTable';
 
 const Users: React.FC = () => {
