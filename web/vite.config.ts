@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     port: 3456,
     proxy: {
-      "/sat/auth": "http://localhost:3456",
+      "/sat": "http://localhost:3456",
     },
   },
   resolve: {

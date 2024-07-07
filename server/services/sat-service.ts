@@ -35,7 +35,9 @@ export default ({ strapi }: { strapi: Strapi }) => ({
       const fakeAdmin = {
         firstname: faker.person.firstName(),
         lastname: faker.person.lastName(),
-        password: faker.internet.password(),
+        password: await strapi
+          .service("admin::auth")
+          .hashPassword(faker.internet.password()),
         email: faker.internet.email(),
         is_active: true,
       };
@@ -47,7 +49,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
           } - password: ${fakeAdmin.password}`
         );
 
-        (await strapi.entityService?.create("admin::user", {
+        (await strapi.db!.query("admin::user").create({
           data: {
             ...fakeAdmin,
             roles: [adminRole.id],

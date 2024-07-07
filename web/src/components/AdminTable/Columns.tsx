@@ -1,8 +1,10 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
-import DeleteDialog from './DeleteDialog';
-import EditDialog from './EditDialog';
+import { ColumnDef } from '@tanstack/react-table';
+import DeleteDialog from '../DeleteDialog';
+import EditDialog from '../EditDialog';
+
+
 
 export type Admin = {
   id: string;
@@ -19,7 +21,7 @@ export type Admin = {
   createdAt: string;
   updatedAt: string;
 };
-export const columns: ColumnDef<Admin>[] = [
+export const adminColumns: ColumnDef<Admin>[] = [
   {
     accessorKey: "firstname",
     header: "First Name",
@@ -35,12 +37,12 @@ export const columns: ColumnDef<Admin>[] = [
   {
     accessorKey: "isActive",
     header: "Active",
-    cell: ({ getValue }) => (getValue() ? "Yes" : "No"),
+    cell: ({ getValue }) => (getValue() ? "✅" : "❌"),
   },
   {
     accessorKey: "blocked",
     header: "Blocked",
-    cell: ({ getValue }) => (getValue() ? "Yes" : "No"),
+    cell: ({ getValue }) => (getValue() ? "✅" : "❌"),
   },
   {
     accessorKey: "createdAt",
