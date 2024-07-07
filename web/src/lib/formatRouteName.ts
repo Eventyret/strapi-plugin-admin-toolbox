@@ -1,9 +1,10 @@
+import { RouteObject } from "react-router-dom";
+import { routes } from "../routes";
+
 export const formatRouteName = (pathname: string) => {
-  return (
-    pathname
-      .split("/")
-      .filter(Boolean)
-      .map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
-      .join(" ") || "Dashboard"
+  const matchingRoute = routes.find(
+    (route: RouteObject) =>
+      route.path === pathname || `/${route.path}` === pathname
   );
+  return matchingRoute ? matchingRoute.title : "Home";
 };

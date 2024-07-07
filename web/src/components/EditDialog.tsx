@@ -58,10 +58,10 @@ const EditDialog: React.FC<EditDialogProps> = ({ admin, onSave }) => {
             <Label htmlFor="isActive">Active</Label>
           </div>
           <div className="flex justify-end space-x-2">
-            <Button type="button" variant="outline" onClick={ handleSave }>Save</Button>
             <DialogClose asChild>
-              <Button type="button">Cancel</Button>
+              <Button type="button" variant="outline">Cancel</Button>
             </DialogClose>
+            <Button type="button" onClick={ handleSave }>Save</Button>
           </div>
         </form>
       </DialogContent>

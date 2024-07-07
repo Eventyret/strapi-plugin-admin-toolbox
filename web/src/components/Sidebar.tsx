@@ -1,4 +1,4 @@
-import { HomeIcon, MountainIcon, PackageIcon, SettingsIcon, ShoppingCartIcon, UsersIcon, LucideIcon } from 'lucide-react';
+import { HomeIcon, MountainIcon, PackageIcon, SettingsIcon, ShoppingCartIcon, UsersIcon, LucideIcon, RssIcon } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { routes } from '../routes';
@@ -15,6 +15,7 @@ const iconMap: IconMap = {
   SettingsIcon,
   ShoppingCartIcon,
   PackageIcon,
+  RssIcon
 };
 
 const Sidebar: React.FC = () => {

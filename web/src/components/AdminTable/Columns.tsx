@@ -47,10 +47,7 @@ export const adminColumns: ColumnDef<Admin>[] = [
   {
     accessorKey: "createdAt",
     header: "Created At",
-  },
-  {
-    accessorKey: "updatedAt",
-    header: "Updated At",
+    cell: ({ row }) => new Date(row.original.createdAt).toLocaleString("en-US", { dateStyle: "full" }),
   },
   {
     header: "Actions",
