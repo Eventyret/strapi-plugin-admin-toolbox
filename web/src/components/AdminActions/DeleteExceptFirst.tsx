@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from './ui/dialog';
-import { Button } from './ui/button';
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from '../ui/dialog';
+import { Button } from '../ui/button';
 import { Circle } from 'lucide-react';
 
 interface DeleteAdminsExceptFirstDialogProps {

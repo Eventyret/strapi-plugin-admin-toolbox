@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Switch } from './ui/switch';
 import { Label } from './ui/label';
-import { Admin } from './AdminTable/Columns';
+import { Admin } from '../lib/types';
 
 interface EditDialogProps {
   admin: Admin;

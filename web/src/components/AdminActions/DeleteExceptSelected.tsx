@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from './ui/dialog';
-import { Button } from './ui/button';
 import { Circle } from 'lucide-react';
-import { Admin } from '../components/AdminTable/Columns'; // Ensure the Admin type is defined correctly
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue, SelectLabel } from './ui/select';
+import React, { useEffect, useState } from 'react';
+import { Admin } from '../../lib/types';
+import { Button } from '../ui/button';
+import { Dialog, DialogContent, DialogFooter, DialogTitle } from '../ui/dialog';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 interface DeleteAdminsExceptSelectedDialogProps {
   open: boolean;
@@ -11,7 +11,7 @@ interface DeleteAdminsExceptSelectedDialogProps {
   onAdminsDeleted: () => void;
 }
 
-const DeleteAdminsExceptSelectedDialog: React.FC<DeleteAdminsExceptSelectedDialogProps> = ({ open, onClose, onAdminsDeleted }) => {
+const DeleteExceptSelected: React.FC<DeleteAdminsExceptSelectedDialogProps> = ({ open, onClose, onAdminsDeleted }) => {
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [selectedAdmin, setSelectedAdmin] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -74,14 +74,11 @@ const DeleteAdminsExceptSelectedDialog: React.FC<DeleteAdminsExceptSelectedDialo
             <SelectValue placeholder="Select the admin you want to keep" />
           </SelectTrigger>
           <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Admins</SelectLabel>
-              { admins.map((admin) => (
-                <SelectItem key={ admin.id } value={ admin.email }>
-                  { admin.firstname } { admin.lastname } ({ admin.email })
-                </SelectItem>
-              )) }
-            </SelectGroup>
+            { admins.map((admin) => (
+              <SelectItem key={ admin.id } value={ admin.email }>
+                { admin.firstname } { admin.lastname } ({ admin.email })
+              </SelectItem>
+            )) }
           </SelectContent>
         </Select>
         { error && <p style={ { color: 'red' } }>{ error }</p> }
@@ -98,4 +95,4 @@ const DeleteAdminsExceptSelectedDialog: React.FC<DeleteAdminsExceptSelectedDialo
   );
 };
 
-export default DeleteAdminsExceptSelectedDialog;
+export default DeleteExceptSelected;

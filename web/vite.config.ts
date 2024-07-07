@@ -18,5 +18,15 @@ export default defineConfig({
   build: {
     outDir: path.resolve(__dirname, "../dist/web"),
     emptyOutDir: true,
+    sourcemap: true,
+    rollupOptions: {
+      onwarn(warning, defaultHandler) {
+        if (warning.code === "SOURCEMAP_ERROR") {
+          return;
+        }
+
+        defaultHandler(warning);
+      },
+    },
   },
 });

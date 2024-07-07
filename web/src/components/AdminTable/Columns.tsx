@@ -1,26 +1,10 @@
 "use client";
 
 import { ColumnDef } from '@tanstack/react-table';
+import { Admin } from '../../lib/types';
 import DeleteDialog from '../DeleteDialog';
 import EditDialog from '../EditDialog';
 
-
-
-export type Admin = {
-  id: string;
-  firstname: string;
-  lastname: string;
-  username: string | null;
-  email: string;
-  password: string;
-  resetPasswordToken: string | null;
-  registrationToken: string | null;
-  isActive: boolean;
-  blocked: boolean;
-  preferedLanguage: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
 export const adminColumns: ColumnDef<Admin>[] = [
   {
     accessorKey: "firstname",

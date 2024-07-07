@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { Input } from './ui/input';
-import { Dialog, DialogContent, DialogFooter, DialogTitle } from './ui/dialog';
-import { Button } from './ui/button';
+import { Dialog, DialogContent, DialogTitle } from '../ui/dialog';
 import { Circle } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from '../ui/button';
+import { DialogFooter } from '../ui/dialog';
+import { Input } from '../ui/input';
+
 
 interface CreateAdminDialogProps {
   open: boolean;
