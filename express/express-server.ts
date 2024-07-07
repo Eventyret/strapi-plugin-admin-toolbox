@@ -1,10 +1,12 @@
 import path from "path";
 import express from "express";
-import session from "express-session";
 import { execSync } from "child_process";
 import net from "net";
-import authRoutes from "./routes/auth";
 import { Strapi } from "@strapi/strapi";
+import authRoutes from "./routes/auth";
+import strapiRoutes from "./routes/strapi"; // Import the Strapi routes
+import { setStrapiInstance } from "./strapi"; // Import the setStrapiInstance function
+import crypto from "crypto"; // Import crypto for generating a random JWT secret
 
 const checkPortInUse = (port: number): Promise<boolean> => {
   return new Promise((resolve, reject) => {
@@ -40,10 +42,15 @@ const killProcessOnPort = (port: number) => {
 };
 
 export const startSATServer = async (strapi: Strapi) => {
+  setStrapiInstance(strapi); // Set the Strapi instance
+
   const publicDir = path.resolve(__dirname, "../../dist/web");
   const indexPath = path.resolve(publicDir, "index.html");
   console.log(publicDir);
   const port = 3456;
+
+  // Generate a random JWT secret
+  const jwtSecret = crypto.randomBytes(32).toString("hex");
 
   console.log(`🌐 Checking if port ${port} is in use...`);
 
@@ -57,22 +64,12 @@ export const startSATServer = async (strapi: Strapi) => {
 
     const app = express();
 
-    // Set up sessions
-    app.use(
-      session({
-        secret: "your-secret-key",
-        resave: false,
-        saveUninitialized: true,
-        cookie: { httpOnly: true, secure: false, maxAge: 600000 }, // 10 minutes
-      })
-    );
-
     // Middleware to parse JSON
     app.use(express.json());
 
-    // Use routes
-    app.use("/sat/auth", authRoutes);
-    // app.use("/sat/protected", protectedRoutes);
+    // Use routes with jwtSecret
+    app.use("/sat/auth", authRoutes(jwtSecret));
+    app.use("/sat/strapi", strapiRoutes); // Use the Strapi routes
 
     // Serve static files from the Vite build directory
     app.use(express.static(publicDir));

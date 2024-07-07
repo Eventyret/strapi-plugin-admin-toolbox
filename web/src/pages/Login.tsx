@@ -1,54 +1,39 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/button';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Login: React.FC = () => {
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    const response = await fetch('/sat/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password }),
-    });
-
-    if (response.ok) {
-      setMessage('Login successful');
-      window.location.href = '/'; // Redirect to the desired route
-    } else {
-      setMessage('Unauthorized');
-    }
-  };
-
-  const generatePassword = async () => {
-    const response = await fetch('http://localhost:3456/sat/auth/get-password', {
+  const authenticate = async () => {
+    setLoading(true);
+    const response = await fetch('/sat/auth/authenticate', {
       method: 'GET',
+      credentials: 'include',
     });
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
-      setPassword(data.password);
+      sessionStorage.setItem('token', data.token);
+      navigate('/');
     } else {
-      setMessage('Failed to generate password');
+      console.error('Failed to authenticate');
     }
-  }
+    setLoading(false);
+  };
 
   return (
-    <div className="login-container">
-      <h1>Login</h1>
-      <form onSubmit={ handleSubmit }>
-        <input
-          type="password"
-          placeholder="Enter password"
-          value={ password }
-          onChange={ (e) => setPassword(e.target.value) }
-        />
-        <button type="submit">Login</button>
-      </form>
-      <Button onClick={ generatePassword }>Generate Password</Button>
-      { message && <p>{ message }</p> }
+    <div className="login-container flex flex-col items-center justify-center min-h-screen">
+      { loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <h1>Login</h1>
+          <Button onClick={ authenticate }>Authenticate</Button>
+        </>
+      ) }
     </div>
   );
 };

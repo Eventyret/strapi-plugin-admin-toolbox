@@ -1,6 +1,21 @@
-import { MountainIcon, HomeIcon, UsersIcon, PackageIcon, ShoppingCartIcon, SettingsIcon } from 'lucide-react';
+import { HomeIcon, MountainIcon, PackageIcon, SettingsIcon, ShoppingCartIcon, UsersIcon, LucideIcon } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { routes } from '../routes';
+
+// Define a type for the icons
+interface IconMap {
+  [key: string]: LucideIcon;
+}
+
+const iconMap: IconMap = {
+  HomeIcon,
+  UsersIcon,
+  MountainIcon,
+  SettingsIcon,
+  ShoppingCartIcon,
+  PackageIcon,
+};
 
 const Sidebar: React.FC = () => {
   return (
@@ -12,26 +27,19 @@ const Sidebar: React.FC = () => {
         </Link>
       </div>
       <nav className="flex flex-col space-y-1">
-        <Link to="/" className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-muted">
-          <HomeIcon className="h-5 w-5" />
-          Dashboard
-        </Link>
-        <Link to="/users" className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-muted">
-          <UsersIcon className="h-5 w-5" />
-          Users
-        </Link>
-        <Link to="/products" className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-muted">
-          <PackageIcon className="h-5 w-5" />
-          Products
-        </Link>
-        <Link to="/orders" className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-muted">
-          <ShoppingCartIcon className="h-5 w-5" />
-          Orders
-        </Link>
-        <Link to="/settings" className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-muted">
-          <SettingsIcon className="h-5 w-5" />
-          Settings
-        </Link>
+        { routes.filter(route => route.label).map((route) => {
+          const IconComponent = iconMap[route.icon!];
+          return (
+            <Link
+              key={ route.path }
+              to={ route.path }
+              className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-muted"
+            >
+              { IconComponent && <IconComponent className="h-5 w-5" /> }
+              { route.label }
+            </Link>
+          );
+        }) }
       </nav>
     </aside>
   );

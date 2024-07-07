@@ -1,43 +1,38 @@
 import express from "express";
-import crypto from "crypto";
+import jwt from "jsonwebtoken";
 
-const router = express.Router();
+const authRoutes = (jwtSecret: string) => {
+  const router = express.Router();
 
-// Generate a random password for each session
-const generatePassword = () => {
-  return crypto.randomBytes(16).toString("hex");
-};
+  // Route to generate JWT token
+  router.get("/authenticate", (req, res) => {
+    const token = jwt.sign({ authenticated: true }, jwtSecret, {
+      expiresIn: "5m",
+    });
+    res.json({ token });
+  });
 
-// Route to get the password
-router.get("/get-password", (req, res) => {
-  if (!req.session.password) {
-    req.session.password = generatePassword();
-    console.log(`Generated password: ${req.session.password}`);
-  }
-  console.log("same request sent", req.session.password);
-  res.json({ password: req.session.password });
-});
+  // Route to check JWT token
+  router.get("/check-session", (req, res) => {
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) {
+      return res.status(401).send("Not authenticated");
+    }
 
-// Route to login
-router.post("/login", (req, res) => {
-  const { password } = req.body;
-  if (password === req.session.password) {
-    req.session.isAuthenticated = true;
-    res.send("Login successful");
-  } else {
-    res.status(401).send("Unauthorized");
-  }
-});
-
-// Route to logout
-router.post("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).send("Could not log out.");
-    } else {
-      res.send("Logout successful");
+    try {
+      jwt.verify(token, jwtSecret);
+      res.status(200).send("Authenticated");
+    } catch (error) {
+      res.status(401).send("Not authenticated");
     }
   });
-});
 
-export default router;
+  // Route to logout (invalidate token client-side)
+  router.post("/logout", (req, res) => {
+    res.status(200).send("Logout successful");
+  });
+
+  return router;
+};
+
+export default authRoutes;
