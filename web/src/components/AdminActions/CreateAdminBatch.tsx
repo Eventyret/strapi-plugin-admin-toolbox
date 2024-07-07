@@ -47,7 +47,7 @@ const CreateAdminBatch: React.FC<CreateAdminDialogProps> = ({ open, onClose, onU
   return (
     <Dialog open={ open } onOpenChange={ onClose }>
       <DialogContent>
-        <DialogTitle>Create Admin User</DialogTitle>
+        <DialogTitle>Create Fake Admin Users</DialogTitle>
         <Input
           placeholder="How many admins do you want to create?"
           type='number'

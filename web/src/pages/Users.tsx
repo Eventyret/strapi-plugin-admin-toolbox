@@ -36,7 +36,7 @@ const Users: React.FC = () => {
     <div>
       <div className='flex justify-end space-x-2 my-5'>
         <Button onClick={ () => setOpenCreateDialog(true) }>Create Admin</Button>
-        <Button onClick={ () => setOpenCreateBatchDialog(true) }>Batch Create Admin</Button>
+        <Button onClick={ () => setOpenCreateBatchDialog(true) }>Fake Admin Creation</Button>
         <Button onClick={ () => setOpenDeleteFirstDialog(true) }>Delete All Except First</Button>
         <Button onClick={ () => setOpenDeleteSelectedDialog(true) }>Delete All Except Selected</Button>
 
